@@ -61,8 +61,40 @@ export class CalderoComponent implements OnInit, OnDestroy {
     //
     // Pista: Construye objetos con la estructura de la interfaz 'Pocion'.
     // =======================================================================
-
+    this.pociones = [
+      {
+        id: 1,
+        nombre: 'Poción Multijugos',
+        descripcion: 'Permite transformarse en otra persona.',
+        nivelPeligro: 8,
+        tiempoCoccionMinutos: 45,
+        tipoMagia: 'Transmutacion',
+        ingredientes: ['Sangre de dragón', 'Escamas de sirena'],
+        estable: false
+      },
+      {
+        id: 2,
+        nombre: 'Felix Felicis',
+        descripcion: 'Otorga buena suerte temporal.',
+        nivelPeligro: 3,
+        tiempoCoccionMinutos: 120,
+        tipoMagia: 'Curacion',
+        ingredientes: ['Raíz de felicidad', 'Polvo de estrella'],
+        estable: true
+      },
+      {
+        id: 3,
+        nombre: 'Filtro de Muertos',
+        descripcion: 'Permite filtrar a los muertos y evitar su influencia.',
+        nivelPeligro: 10,
+        tiempoCoccionMinutos: 90,
+        tipoMagia: 'Prohibida',
+        ingredientes: ['Huesos de dragón', 'Lágrimas de unicornio'],
+        estable: false
+      }
+    ];
     // Guardar estado inicial en el Giratiempo (se usa en el Reto 6)
+
     this.guardarEstadoGiratiempo();
   }
 
