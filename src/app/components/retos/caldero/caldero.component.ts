@@ -171,6 +171,10 @@ export class CalderoComponent implements OnInit, OnDestroy {
   // =========================================================================
   ngOnDestroy(): void {
     // TODO: Reto 4 - Escribe aquí tu clearInterval
+    if (this.timerIntervalId) {
+      clearInterval(this.timerIntervalId);
+      this.timerIntervalId = null;
+    }
   }
 
   // -------------------------------------------------------------------------
