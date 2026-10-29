@@ -115,7 +115,13 @@ export class CalderoComponent implements OnInit, OnDestroy {
   // =========================================================================
   esFormularioValido(): boolean {
     // TODO: Reto 3 - Reemplaza 'return false' por tus validaciones
-    return false;
+    const nombreLimpio = this.nuevoNombre.trim();
+    return (
+      nombreLimpio.length >= 3 &&
+      this.nuevoTiempoCoccion > 0 &&
+      this.nuevoNivelPeligro >= 1 &&
+      this.nuevoNivelPeligro <= 10
+    );
   }
 
   // =========================================================================
@@ -130,6 +136,25 @@ export class CalderoComponent implements OnInit, OnDestroy {
     if (!this.esFormularioValido()) return;
 
     // TODO: Reto 3 - Construye el objeto Pocion, haz push a this.pociones y resetea las variables
+    const nuevaPocion: Pocion = {
+      id: Date.now(),
+      nombre: this.nuevoNombre.trim(),
+      descripcion: this.nuevaDescripcion.trim() || 'Poción recién elaborada.',
+      nivelPeligro: this.nuevoNivelPeligro,
+      tiempoCoccionMinutos: this.nuevoTiempoCoccion,
+      tipoMagia: this.nuevoTipoMagia,
+      ingredientes: ['Pelo de unicornio', 'Escamas de dragón'], 
+      estable: this.nuevoNivelPeligro <= 7
+    };
+
+    this.pociones.push(nuevaPocion);
+    this.guardarEstadoGiratiempo();
+    // Resetear los inputs del formulario
+    this.nuevoNombre = '';
+    this.nuevaDescripcion = '';
+    this.nuevoNivelPeligro = 1;
+    this.nuevoTiempoCoccion = 0;
+    this.nuevoTipoMagia = 'Curacion';
   }
 
   eliminarPocion(id: number): void {
