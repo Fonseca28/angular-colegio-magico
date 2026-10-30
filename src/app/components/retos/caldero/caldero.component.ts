@@ -245,24 +245,36 @@ export class CalderoComponent implements OnInit, OnDestroy {
   // - giratiempoRehacer(): Avanza el índice y restaura una copia de ese estado.
   // =========================================================================
   guardarEstadoGiratiempo(): void {
-    // TODO: Reto 6 - Implementar guardado inmutable en el historial
+    if (this.indiceHistorial < this.historialPasos.length - 1) {
+      this.historialPasos = this.historialPasos.slice(
+        0,
+        this.indiceHistorial + 1
+      );
+    }
+
+    this.historialPasos.push(structuredClone(this.pociones));
+    this.indiceHistorial = this.historialPasos.length - 1;
   }
 
   puedeDeshacer(): boolean {
-    // TODO: Reto 6 - Retornar si es posible retroceder
-    return false;
+    return this.indiceHistorial > 0;
   }
 
   puedeRehacer(): boolean {
-    // TODO: Reto 6 - Retornar si es posible avanzar
-    return false;
+    return this.indiceHistorial < this.historialPasos.length - 1;
   }
 
   giratiempoDeshacer(): void {
-    // TODO: Reto 6 - Revertir al estado anterior
+    if (!this.puedeDeshacer()) return;
+
+    this.indiceHistorial--;
+    this.pociones = structuredClone(this.historialPasos[this.indiceHistorial]);
   }
 
   giratiempoRehacer(): void {
-    // TODO: Reto 6 - Avanzar al estado siguiente
+    if (!this.puedeRehacer()) return;
+
+    this.indiceHistorial++;
+    this.pociones = structuredClone(this.historialPasos[this.indiceHistorial]);
   }
 }
